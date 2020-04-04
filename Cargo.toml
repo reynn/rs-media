@@ -1,0 +1,11 @@
+[package]
+authors = ["Nic Patterson <nic@reynn.dev>"]
+edition = "2018"
+name = "mmmedia-core"
+version = "0.1.0"
+
+[dependencies]
+clap = { git = "https://github.com/clap-rs/clap/", features = ["yaml"] }
+walkdir = "*"
+lazy_static = "*"
+regex = "*"
