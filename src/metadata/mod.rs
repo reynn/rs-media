@@ -5,4 +5,3 @@ pub struct Metadata {
     pub title: String,
     pub resolution: String,
 }
-
