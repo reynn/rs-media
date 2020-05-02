@@ -9,19 +9,54 @@ resources:
     - repository: rust_pipelines
       type: github
       name: xoac/rust-azure-pipelines
-      ref: refs/tags/v0.0.3
-      endpoint: github.com_reynn
+      # ref: refs/tags/v0.1.0-alpha.2
+      ref: refs/heads/master
+      endpoint: github_reynn
 
-stages:
+stages: 
 - stage: check
   displayName: "Quick checks"
   jobs:
-  - template: ci/jobs/cargo-check.yml@rust_pipelines
+  - template: ci/scenarios/check.yml@rust_pipelines
+    parameters: # You can make conditions here.
+      cargo-check: true
+      cargo-check-nigtly: true # this can fail and stage check still succeed
+      cargo-clippy: true
+      rustfmt: true
 
 - stage: test
-  displayName: "Clippy"
+  displayName: "Multi OS native tests"
   jobs:
-  - template: ci/jobs/cargo-clippy.yml@rust_pipelines
+  - template: ci/scenarios/test.yml@rust_pipelines
     parameters:
-      min_rust_supported: 1.42
+      min_rust_supported: 1.41 # this is default setting for test
 
+# This stage allow to easy test your crate using cross project. 
+# Supported targets: https://github.com/rust-embedded/cross#supported-targets
+- stage: embedded
+  displayName: "Cross check and tests"
+  dependsOn:
+    - check
+  jobs:
+  - template: ci/scenarios/embeeded.yml@rust_pipelines
+    parameters:
+      checks:
+        - target: mips-unknown-linux-musl
+          name: cross_chcek_i686_unknown_freebsd 
+        - target: aarch64-unknown-linux-gnu
+          name: cross_check_aarch64_unknown_linux_gnu
+      tests:
+        - target: i686-unknown-linux-gnu
+          name: cross_test_i686_unknown_linux_gnu
+
+# This stage build binaries - you can deploy them in next stage
+- stage: build
+  displayName: "Builds"
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
+  dependsOn:
+    - embedded
+    - test 
+  jobs:
+  - template: ci/scenarios/builds.yml@rust_pipelines 
+    parameters:
+      artifactName: target
