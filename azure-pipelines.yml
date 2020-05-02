@@ -1,19 +1,27 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- master
+  branches:
+    include: ['*']
+  tags:
+    include: ['*']
 
-pool:
-  vmImage: 'ubuntu-latest'
+resources:
+  repositories:
+    - repository: rust_pipelines
+      type: github
+      name: xoac/rust-azure-pipelines
+      ref: refs/tags/v0.1.0
+      endpoint: github.com_reynn
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: check
+  displayName: "Quick checks"
+  jobs:
+  - template: ci/scenarios/check.yml@rust_pipelines
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- stage: test
+  displayName: "Multi OS native tests"
+  jobs:
+  - template: ci/scenarios/test.yml@rust_pipelines
+    parameters:
+      min_rust_supported: 1.42
+
