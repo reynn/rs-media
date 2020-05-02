@@ -19,7 +19,7 @@ stages:
   - template: ci/jobs/cargo-check.yml@rust_pipelines
 
 - stage: test
-  displayName: "Multi OS native tests"
+  displayName: "Clippy"
   jobs:
   - template: ci/jobs/cargo-clippy.yml@rust_pipelines
     parameters:
