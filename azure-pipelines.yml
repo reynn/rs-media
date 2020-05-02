@@ -16,12 +16,12 @@ stages:
 - stage: check
   displayName: "Quick checks"
   jobs:
-  - template: ci/scenarios/check.yml@rust_pipelines
+  - template: ci/jobs/cargo-check.yml@rust_pipelines
 
 - stage: test
   displayName: "Multi OS native tests"
   jobs:
-  - template: ci/scenarios/test.yml@rust_pipelines
+  - template: ci/jobs/cargo-clippy.yml@rust_pipelines
     parameters:
       min_rust_supported: 1.42
 
