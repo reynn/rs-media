@@ -58,7 +58,6 @@ stages:
   # This stage build binaries - you can deploy them in next stage
   - stage: build
     displayName: "Builds"
-    condition: and(succeeded())
     dependsOn:
       - embedded
       - test
