@@ -42,22 +42,22 @@ stages:
         parameters:
           checks:
             - target: x86_64-pc-windows-gnu
-              name: cross-check-windows-64-bit
+              name: cross_check_windows_64
             - target: x86_64-unknown-linux-gnu
-              name: cross-check-linux-gnu-64-bit
+              name: cross_check_linux_gnu_64
             - target: x86_64-unknown-linux-musl
-              name: cross-check-linux-musl-64-bit
+              name: cross_check_linux_musl_64
             - target: x86_64-apple-darwin
-              name: cross-check-apple-darwin
+              name: cross_check_apple_darwin
           tests:
             - target: x86_64-pc-windows-gnu
-              name: cross-test-windows-64-bit
+              name: cross_test_windows_64
             - target: x86_64-unknown-linux-gnu
-              name: cross-test-linux-gnu-64-bit
+              name: cross_test_linux_gnu_64
             - target: x86_64-unknown-linux-musl
-              name: cross-test-linux-musl-64-bit
+              name: cross_test_linux_musl_64
             - target: x86_64-apple-darwin
-              name: cross-test-apple-darwin
+              name: cross_test_apple_darwin
 
   # This stage build binaries - you can deploy them in next stage
   - stage: build
