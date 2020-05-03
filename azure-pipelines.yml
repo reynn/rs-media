@@ -47,8 +47,6 @@ stages:
               name: cross_check_linux_gnu_64
             - target: x86_64-unknown-linux-musl
               name: cross_check_linux_musl_64
-            - target: x86_64-apple-darwin
-              name: cross_check_apple_darwin
           tests:
             - target: x86_64-pc-windows-gnu
               name: cross_test_windows_64
@@ -56,8 +54,6 @@ stages:
               name: cross_test_linux_gnu_64
             - target: x86_64-unknown-linux-musl
               name: cross_test_linux_musl_64
-            - target: x86_64-apple-darwin
-              name: cross_test_apple_darwin
 
   # This stage build binaries - you can deploy them in next stage
   - stage: build
