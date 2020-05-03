@@ -1,8 +1,8 @@
 trigger:
   branches:
-    include: ['*']
+    include: ["*"]
   tags:
-    include: ['*']
+    include: ["*"]
 
 resources:
   repositories:
@@ -13,50 +13,60 @@ resources:
       ref: refs/heads/master
       endpoint: github_reynn
 
-stages: 
-- stage: check
-  displayName: "Quick checks"
-  jobs:
-  - template: ci/scenarios/check.yml@rust_pipelines
-    parameters: # You can make conditions here.
-      cargo-check: true
-      cargo-check-nigtly: true # this can fail and stage check still succeed
-      cargo-clippy: true
-      rustfmt: true
+stages:
+  - stage: check
+    displayName: "Quick checks"
+    jobs:
+      - template: ci/scenarios/check.yml@rust_pipelines
+        parameters: # You can make conditions here.
+          cargo-check: true
+          cargo-check-nigtly: true # this can fail and stage check still succeed
+          cargo-clippy: true
+          rustfmt: true
 
-- stage: test
-  displayName: "Multi OS native tests"
-  jobs:
-  - template: ci/scenarios/test.yml@rust_pipelines
-    parameters:
-      min_rust_supported: 1.41 # this is default setting for test
+  - stage: test
+    displayName: "Multi OS native tests"
+    jobs:
+      - template: ci/scenarios/test.yml@rust_pipelines
+        parameters:
+          min_rust_supported: 1.37.0
 
-# This stage allow to easy test your crate using cross project. 
-# Supported targets: https://github.com/rust-embedded/cross#supported-targets
-- stage: embedded
-  displayName: "Cross check and tests"
-  dependsOn:
-    - check
-  jobs:
-  - template: ci/scenarios/embeeded.yml@rust_pipelines
-    parameters:
-      checks:
-        - target: mips-unknown-linux-musl
-          name: cross_chcek_i686_unknown_freebsd 
-        - target: aarch64-unknown-linux-gnu
-          name: cross_check_aarch64_unknown_linux_gnu
-      tests:
-        - target: i686-unknown-linux-gnu
-          name: cross_test_i686_unknown_linux_gnu
+  # This stage allow to easy test your crate using cross project.
+  # Supported targets: https://github.com/rust-embedded/cross#supported-targets
+  - stage: embedded
+    displayName: "Cross check and tests"
+    dependsOn:
+      - check
+    jobs:
+      - template: ci/scenarios/embeeded.yml@rust_pipelines
+        parameters:
+          checks:
+            - target: x86_64-pc-windows-gnu
+              name: cross-check-windows-64-bit
+            - target: x86_64-unknown-linux-gnu
+              name: cross-check-linux-gnu-64-bit
+            - target: x86_64-unknown-linux-musl
+              name: cross-check-linux-musl-64-bit
+            - target: x86_64-apple-darwin
+              name: cross-check-apple-darwin
+          tests:
+            - target: x86_64-pc-windows-gnu
+              name: cross-test-windows-64-bit
+            - target: x86_64-unknown-linux-gnu
+              name: cross-test-linux-gnu-64-bit
+            - target: x86_64-unknown-linux-musl
+              name: cross-test-linux-musl-64-bit
+            - target: x86_64-apple-darwin
+              name: cross-test-apple-darwin
 
-# This stage build binaries - you can deploy them in next stage
-- stage: build
-  displayName: "Builds"
-  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
-  dependsOn:
-    - embedded
-    - test 
-  jobs:
-  - template: ci/scenarios/builds.yml@rust_pipelines 
-    parameters:
-      artifactName: target
+  # This stage build binaries - you can deploy them in next stage
+  - stage: build
+    displayName: "Builds"
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
+    dependsOn:
+      - embedded
+      - test
+    jobs:
+      - template: ci/scenarios/builds.yml@rust_pipelines
+        parameters:
+          artifactName: target
