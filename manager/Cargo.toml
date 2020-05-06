@@ -1,0 +1,10 @@
+[package]
+authors = ["Nic Patterson <224374+reynn@users.noreply.github.com>"]
+edition = "2018"
+name = "manager"
+version = "0.1.0"
+[dependencies]
+clap = "*"
+
+[dependencies.core]
+path = "../core"
