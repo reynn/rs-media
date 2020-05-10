@@ -1,9 +1,16 @@
 [package]
 name = "core"
 version = "0.1.0"
-authors = ["Nic Patterson <224374+reynn@users.noreply.github.com>"]
+authors = ["Nic Patterson <nic@reynn.dev>"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+error-chain = { version = "~0.12" }
+warp = { version = "~0.2" }
+futures = { version = "~0.3" }
+reqwest = { version = "~0.10", features = ["json"] }
+tokio = { version = "~0.2", features = ["full"] }
+log = { version = "~0.4" }
+
+[dev-dependencies]
+test-case = { version = "~1.0" }

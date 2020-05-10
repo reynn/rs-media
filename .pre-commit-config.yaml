@@ -1,0 +1,45 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: meta
+    hooks:
+      - id: check-useless-excludes
+  - repo: local
+    hooks:
+      - id: cargo-fmt
+        name: Run cargo fmt
+        entry: "cargo +nightly fmt"
+        language: system
+        pass_filenames: false
+        types: [file, rust]
+      - id: cargo-test
+        name: Running cargo tests
+        language: system
+        files: '\.rs$'
+        entry: cargo test --lib
+        types: [file, rust]
+        pass_filenames: false
+      - id: cargo-check
+        name: Run cargo check
+        entry: cargo check
+        language: system
+        pass_filenames: false
+        types: [file, rust]
+      - id: cargo-clippy
+        name: Run Clippy checks
+        entry: cargo clippy --all-targets --all -- -D warnings
+        language: system
+        types: [file, rust]
+        pass_filenames: false
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-symlinks
+      - id: check-vcs-permalinks
+      - id: check-toml
+      - id: check-json
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: forbid-new-submodules
+      - id: trailing-whitespace

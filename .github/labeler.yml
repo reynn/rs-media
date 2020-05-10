@@ -1,0 +1,12 @@
+core:
+  - "core/*"
+manager:
+  - "manager/*"
+server:
+  - "server/*"
+client:
+  - "client/*"
+testing:
+  - "**/src/**/*test*"
+  - "**/src/tests/**"
+  - "tests/**"
