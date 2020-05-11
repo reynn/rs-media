@@ -1,4 +1,5 @@
-//! Errors for the event system
+//!
+//! RS Media Core Event Errors
 
 // use std::sync::mpsc::SendError;
 

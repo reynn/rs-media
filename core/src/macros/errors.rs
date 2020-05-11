@@ -1,3 +1,4 @@
-//! RS Media Macros
+//!
+//! RS Media macro errors
 
 error_chain! {}

@@ -1,4 +1,5 @@
-//! Module containing high level metadata interfaces
+//!
+//! # RS Media Core Metadata
 
 /// Internal errors module
 pub mod errors;

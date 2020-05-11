@@ -1,4 +1,5 @@
-//! # RS Media Sorting
+//!
+//! # RS Media Core Sorting
 //! ## SortMethod
 //! Usually passed to a SortOption variant, tells the option what
 //! direction to sort the results, or to put a "shuffle" or "random"

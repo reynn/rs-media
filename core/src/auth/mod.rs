@@ -1,4 +1,5 @@
-//! # Core Auth wrappers
+//!
+//! # RS Media Core Authentication
 
 /// Internal errors module
 pub mod errors;

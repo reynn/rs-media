@@ -1,3 +1,4 @@
+//!
 //! Errors for the Library listeners
 
 error_chain! {

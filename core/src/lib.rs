@@ -14,21 +14,21 @@
 #[macro_use]
 extern crate error_chain;
 
-/// Core Authentication modules
+/// Core modules: Authentication
 pub mod auth;
-/// Core Error modules
+/// Core modules: Error
 pub mod errors;
-/// Core Event system
+/// Core modules: Event
 pub mod events;
-/// Core HTTP modules
+/// Core modules: HTTP
 pub mod http;
-/// Core Library modules
+/// Core modules: Library
 pub mod library;
-/// Core Logging
+/// Core modules: Logging
 pub mod logging;
-/// Core Macros
+/// Core modules: Macros
 pub mod macros;
-/// Core Metadata
+/// Core modules: Metadata
 pub mod metadata;
-/// Core Sorting
+/// Core modules: Sorting
 pub mod sorting;

@@ -1,5 +1,5 @@
-//! RS Media Core Errors
 //!
+//! # RS Media Core Errors
 //! Links various internal error types
 
 error_chain! {

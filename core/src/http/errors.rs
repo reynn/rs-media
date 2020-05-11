@@ -1,3 +1,4 @@
+//!
 //! RS Media Core HTTP Errors
 
 // use {client, server};

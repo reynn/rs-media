@@ -1,4 +1,5 @@
-//! RS Media Auth client errors
+//!
+//! RS Media Core Authentication errors
 
 error_chain! {
     errors {

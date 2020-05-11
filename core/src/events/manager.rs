@@ -1,4 +1,5 @@
-//! RS Media events manager
+//!
+//! RS Media Core Events Manager
 //! This will be responsible for listening for events and dispatching any relevant handlers
 
 use std::sync::mpsc::{channel, Receiver, Sender};

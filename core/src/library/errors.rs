@@ -1,3 +1,4 @@
+//!
 //! RS Media Core Library errors
 
 error_chain! {

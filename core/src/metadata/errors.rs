@@ -1,3 +1,4 @@
-//! RS Media Metadata
+//!
+//! RS Media Metadata Errors
 
 error_chain! {}

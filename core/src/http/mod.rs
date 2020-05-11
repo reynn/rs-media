@@ -1,9 +1,10 @@
-//! Core HTTP wrappers
+//!
+//! # RS Media Core HTTP modules
 
-/// Client
+/// HTTP Client
 pub mod client;
 
-/// Server
+/// HTTP Server
 pub mod server;
 
 /// Internal errors module

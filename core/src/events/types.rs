@@ -1,4 +1,5 @@
-//! RS Media Event Types
+//!
+//! RS Media Core Event Types
 
 use super::errors::*;
 use super::traits::Event;

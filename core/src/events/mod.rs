@@ -1,4 +1,5 @@
-//! # Core event system
+//!
+//! # RS Media Core Event System
 
 /// Event system error types
 pub mod errors;

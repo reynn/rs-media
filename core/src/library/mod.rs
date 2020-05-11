@@ -1,4 +1,5 @@
-//! RS Core library module
+//!
+//! # RS Media Core Library Modules
 
 /// Internal errors module
 pub mod errors;
