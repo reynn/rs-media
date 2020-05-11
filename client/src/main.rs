@@ -11,8 +11,7 @@
 //! RS Media Client interface
 //! Will include Rust bindings for the public APIs, a basic rust wrapper for an client
 
-#[tokio::main]
-async fn main() {
+fn main() {
     println!("Welcome to the RS Media Client");
     std::thread::sleep(std::time::Duration::new(2, 0));
     println!("RS Media Client is shutting down");

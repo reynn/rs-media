@@ -1,5 +1,6 @@
 #![deny(
     missing_docs,
+    rust_2018_idioms,
     missing_debug_implementations,
     missing_copy_implementations,
     trivial_casts,
@@ -10,20 +11,24 @@
 #![cfg_attr(test, deny(warnings))]
 //! # RS Media Core Modules
 
-#[cfg(test)]
-extern crate test_case;
-
 #[macro_use]
 extern crate error_chain;
-extern crate futures;
 
-/// # Core Auth modules
+/// Core Authentication modules
 pub mod auth;
-/// # Core Error modules
+/// Core Error modules
 pub mod errors;
-/// # Core HTTP modules
+/// Core Event system
+pub mod events;
+/// Core HTTP modules
 pub mod http;
-/// # Core library modules
+/// Core Library modules
 pub mod library;
-
-// tests/integration_test.rs will include tests between the core modules
+/// Core Logging
+pub mod logging;
+/// Core Macros
+pub mod macros;
+/// Core Metadata
+pub mod metadata;
+/// Core Sorting
+pub mod sorting;

@@ -1,5 +1,6 @@
 #![deny(
     missing_docs,
+    rust_2018_idioms,
     missing_debug_implementations,
     missing_copy_implementations,
     trivial_casts,
@@ -12,8 +13,7 @@
 //! Allow client connection for streaming media services
 //! This will likely stay a self hosted solution so users will be setting this up like Jellyfin/Kodi
 
-#[tokio::main]
-async fn main() {
+fn main() {
     println!("Welcome to the RS Media Server");
     std::thread::sleep(std::time::Duration::new(2, 0));
     println!("RS Media Server is shutting down");

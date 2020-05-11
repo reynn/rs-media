@@ -1,12 +1,39 @@
+# Core module labels
 core:
   - "core/*"
+'core::auth':
+  - "core/src/auth/**"
+'core::events':
+  - "core/src/events/**"
+'core::http':
+  - "core/src/http/**"
+'core::library':
+  - "core/src/library/**"
+'core::macros':
+  - "core/src/macros/**"
+'core::metadata':
+  - "core/src/metadata/**"
+'core::sorting':
+  - "core/src/sorting/**"
+# Media management labels
 manager:
   - "manager/*"
+# Media Server labels
 server:
   - "server/*"
+# Client labels
 client:
   - "client/*"
+# Core module labels
 testing:
   - "**/src/**/*test*"
-  - "**/src/tests/**"
+  - "**/benches/**"
+  - "**/examples/**"
+  - "**/tests/**"
   - "tests/**"
+# updates to docs are so great <3
+documentation:
+  - "**/*.md"
+  - "**/benches/**"
+  - "**/examples/**"
+  - "**/tests/**"

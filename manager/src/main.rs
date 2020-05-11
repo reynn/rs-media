@@ -1,5 +1,6 @@
 #![deny(
     missing_docs,
+    rust_2018_idioms,
     missing_debug_implementations,
     missing_copy_implementations,
     trivial_casts,

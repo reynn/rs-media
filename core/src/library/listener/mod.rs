@@ -1,4 +1,6 @@
 //! # Library Listeners
+//! Listeners will be responsible for listening to events and changes to library listeners
+//! As an example a listener for file system events
 
 error_chain! {}
 

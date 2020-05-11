@@ -2,11 +2,16 @@
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![codecov](https://codecov.io/gh/reynn/rs-media/branch/master/graph/badge.svg)](https://codecov.io/gh/reynn/rs-media)
-[![CI](https://github.com/reynn/rs-media/workflows/CI/badge.svg)](https://github.com/reynn/rs-media/actions?query=workflow%3ACI+branch%3Amaster)
+[![CI](https://github.com/reynn/rs-media/workflows/CI/badge.svg?branch=master)](https://github.com/reynn/rs-media/actions?query=workflow%3ACI)
 
 ## Project Overview
 
-Media management and server combo written in Rust
+Media management and server combo written in Rust.
+
+- Music
+- Movies
+- TV Shows
+- Anime
 
 ## FAQ
 
