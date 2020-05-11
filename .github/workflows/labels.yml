@@ -1,7 +1,5 @@
-name: "New Pull Request Automation"
-on:
-  pull_request:
-    types: [opened]
+name: "PR Label Manager"
+on: [pull_request]
 
 jobs:
   triage:

@@ -1,19 +1,19 @@
 # Core module labels
 core:
   - "core/*"
-'core::auth':
+core::auth:
   - "core/src/auth/**"
-'core::events':
+core::events:
   - "core/src/events/**"
-'core::http':
+core::http:
   - "core/src/http/**"
-'core::library':
+core::library:
   - "core/src/library/**"
-'core::macros':
+core::macros:
   - "core/src/macros/**"
-'core::metadata':
+core::metadata:
   - "core/src/metadata/**"
-'core::sorting':
+core::sorting:
   - "core/src/sorting/**"
 # Media management labels
 manager:
