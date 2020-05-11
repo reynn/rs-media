@@ -5,12 +5,16 @@ name: CI
 jobs:
   build:
     name: Build binaries
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        rust_toolchain: [stable, beta, nightly]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable
+          toolchain: ${{ matrix.rust_toolchain }}
       - name: Cache cargo registry
         uses: actions/cache@v1
         with:
@@ -35,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           # Artifact name
-          name: linux-binaries
+          name: ${{ matrix.os }}-binaries
           # A file, directory or wildcard pattern that describes what to upload
           path: ./bins/*
   test:
@@ -51,12 +55,12 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/.cargo/registry
-          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.toml') }}
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('./**/Cargo.toml') }}
       - name: Cache cargo index
         uses: actions/cache@v1
         with:
           path: ~/.cargo/git
-          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.toml') }}
+          key: ${{ runner.os }}-cargo-index-${{ hashFiles('./**/Cargo.toml') }}
       - uses: actions-rs/cargo@v1
         with:
           command: install
