@@ -2,7 +2,7 @@
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![codecov](https://codecov.io/gh/reynn/rs-media/branch/master/graph/badge.svg)](https://codecov.io/gh/reynn/rs-media)
-[![Build Status](https://reynn.visualstudio.com/rs-media/_apis/build/status/reynn.rs-media?branchName=master)](https://reynn.visualstudio.com/rs-media/_build/latest?definitionId=2&branchName=master)
+[![CI](https://github.com/reynn/rs-media/workflows/CI/badge.svg)](https://github.com/reynn/rs-media/actions?query=workflow%3ACI+branch%3Amaster)
 
 ## Project Overview
 
