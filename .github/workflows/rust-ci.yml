@@ -6,37 +6,8 @@ on:
 name: Rust CI
 
 jobs:
-  fetch:
-    name: Fetch and compile for ${{ matrix.os }}+${{ matrix.rust_toolchain }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        rust_toolchain: [stable, beta, nightly]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: ${{ matrix.rust_toolchain }}
-      - name: Cache cargo registry
-        uses: actions/cache@v1
-        with:
-          path: ~/.cargo/registry
-          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.toml') }}
-      - name: Cache cargo index
-        uses: actions/cache@v1
-        with:
-          path: ~/.cargo/git
-          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.toml') }}
-      - uses: actions-rs/cargo@v1
-        with:
-          command: verify-project
-      - uses: actions-rs/cargo@v1
-        with:
-          command: fetch
   build:
     name: Build binaries for ${{ matrix.os }}
-    needs: [fetch]
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -64,16 +35,16 @@ jobs:
         if: ${{ matrix.os != 'Windows' }}
         run: |
           mkdir ./bins
-          mv ./target/release/server ./bins/
-          mv ./target/release/client ./bins/
-          mv ./target/release/manager ./bins/
+          mv ./target/release/zephyrs-server ./bins/
+          mv ./target/release/zephyrs-client ./bins/
+          mv ./target/release/zephyrs-manager ./bins/
       - name: Move binaries to a directory (windows)
         if: ${{ matrix.os == 'Windows' }}
         run: |
           mkdir ./bins
-          mv ./target/release/server.exe ./bins/
-          mv ./target/release/client.exe ./bins/
-          mv ./target/release/manager.exe ./bins/
+          mv ./target/release/zephyrs-server.exe ./bins/
+          mv ./target/release/zephyrs-client.exe ./bins/
+          mv ./target/release/zephyrs-manager.exe ./bins/
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -83,13 +54,6 @@ jobs:
           path: ./bins/*
   test:
     name: Test on rust nightly on ubuntu-latest
-    needs: [fetch]
-    strategy:
-      matrix:
-        crates: [client, core, manager, server]
-        test_type: [unittests, integration, doc, examples]
-
-      fail-fast: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
