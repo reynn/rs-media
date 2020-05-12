@@ -1,2 +1,7 @@
 [workspace]
-members = ["core", "manager", "server", "client"]
+members = [
+  "zephyrs-core",
+  "zephyrs-manager",
+  "zephyrs-server",
+  "zephyrs-client"
+]

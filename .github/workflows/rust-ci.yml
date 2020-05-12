@@ -84,6 +84,12 @@ jobs:
   test:
     name: Test on rust nightly on ubuntu-latest
     needs: [fetch]
+    strategy:
+      matrix:
+        crates: [client, core, manager, server]
+        test_type: [unittests, integration, doc, examples]
+
+      fail-fast: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

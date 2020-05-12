@@ -1,0 +1,8 @@
+[package]
+name = "zephyrs-client"
+version = "0.1.0"
+authors = ["Nic Patterson <nic@reynn.dev>"]
+edition = "2018"
+
+[dependencies]
+zephyrs-core = { path = "../zephyrs-core" }
