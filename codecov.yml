@@ -1,9 +1,9 @@
 codecov:
-  require_ci_to_pass: yes
+  require_ci_to_pass: no
 
 coverage:
   precision: 2
-  round: down
+  round: nearest
   range: "70...100"
 
 parsers:
@@ -11,7 +11,7 @@ parsers:
     branch_detection:
       conditional: yes
       loop: yes
-      method: no
+      method: yes
       macro: no
 
 comment:

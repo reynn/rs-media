@@ -2,11 +2,13 @@
 //! ZephyRS Media Core Events Manager
 //! This will be responsible for listening for events and dispatching any relevant handlers
 
-use std::fmt::Debug;
+use std::fmt::{Debug, Display};
 use std::sync::mpsc::{channel, Receiver, Sender};
 
 use super::errors::*;
 use super::traits::{Event, EventHandler};
+
+#[allow(dead_code)]
 
 /// Main struct for an event manager
 pub struct EventManager {
@@ -16,6 +18,12 @@ pub struct EventManager {
 }
 
 impl Debug for EventManager {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Event manager is ready to handle events")
+    }
+}
+
+impl Display for EventManager {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "Event manager is ready to handle events")
     }
@@ -58,6 +66,20 @@ impl EventManager {
     /// Register an event handler
     pub fn register_handler(&mut self, handler: Box<dyn EventHandler>) -> Result<()> {
         self.handlers.push(handler);
+        Ok(())
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use test_case::test_case;
+
+    #[test_case("a"; "Test the resulting debug output")]
+    fn test_event_manager_debug(_: &str) -> Result<()> {
+        let event_man = EventManager::new()?;
+        let event_man_debg = event_man.to_string();
+        assert_eq!(event_man_debg, "Event manager is ready to handle events");
         Ok(())
     }
 }

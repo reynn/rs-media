@@ -1,5 +1,5 @@
 //!
-//! # RS Media Core Sorting
+//! # ZephyRS Media Core Sorting
 //! ## SortMethod
 //! Usually passed to a SortOption variant, tells the option what
 //! direction to sort the results, or to put a "shuffle" or "random"
@@ -17,7 +17,7 @@ pub mod errors;
 use errors::*;
 
 /// How to order the sorting
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub enum Order {
     /// Sort the Option in a standard -> direction
     Ascending,
@@ -27,8 +27,8 @@ pub enum Order {
     Random,
 }
 
-///
-#[derive(Debug, Clone, Copy)]
+/// How to order a list of Library Items
+#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
 pub enum SortOption {
     /// Sort By the item title alphabetically, specify the ordering
     TitleAlpha(Order),
@@ -50,4 +50,19 @@ impl Default for SortOption {
 }
 
 #[cfg(test)]
-mod test {}
+mod test {
+    use super::*;
+    use test_case::test_case;
+
+    #[test]
+    fn test_sort_option_default() {
+        let d = SortOption::default();
+        assert_eq!(d, SortOption::TitleAlpha(Order::Ascending))
+    }
+
+    #[test_case("AlphaAsc" ; "Parse: AlphaAsc")]
+    fn test_sort_option_new(p: &str) -> Result<()> {
+        SortOption::new(p)?;
+        Ok(())
+    }
+}

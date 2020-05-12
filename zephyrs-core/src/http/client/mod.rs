@@ -1,5 +1,5 @@
 //!
-//! # RS Media Core HTTP Client
+//! # ZephyRS Media Core HTTP Client
 
 /// Super basic wrapper around reqwest http client
 pub use reqwest::*;

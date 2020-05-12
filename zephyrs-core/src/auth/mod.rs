@@ -1,5 +1,5 @@
 //!
-//! # RS Media Core Authentication
+//! # ZephyRS Media Core Authentication
 
 /// Internal errors module
 pub mod errors;

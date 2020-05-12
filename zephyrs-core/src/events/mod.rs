@@ -1,5 +1,5 @@
 //!
-//! # RS Media Core Event System
+//! # ZephyRS Media Core Event System
 
 /// Event system error types
 pub mod errors;

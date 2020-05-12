@@ -8,7 +8,7 @@
     trivial_numeric_casts
 )]
 #![cfg_attr(test, deny(warnings))]
-//! # RS Media Core Modules
+//! # ZephyRS Media Core Modules
 
 #[macro_use]
 extern crate error_chain;

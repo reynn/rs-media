@@ -31,3 +31,17 @@ impl<'a> Event for BasicEvent<'a> {
         self.id.into()
     }
 }
+
+#[cfg(test)]
+mod basic_event_test {
+    use super::*;
+    use test_case::test_case;
+
+    #[test_case("event-test-1"; "Basic test")]
+    fn test_basic_event_get_name(n: &str) -> Result<()> {
+        let be = BasicEvent::new(n)?;
+        assert_eq!(be.get_event_name(), n);
+        assert_eq!(be.get_event_id(), "573a043c-fc71-41c7-a710-d8aa5966b67b");
+        Ok(())
+    }
+}

@@ -1,4 +1,4 @@
-//! # RS Media Core Library Item
+//! # ZephyRS Media Core Library Item
 //! `A Library Item` is all data related to a specific item delivered to a client
 //! or modified by the server and manager
 

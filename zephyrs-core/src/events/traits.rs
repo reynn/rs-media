@@ -1,5 +1,5 @@
 //!
-//! # RS Media Core Event traits
+//! # ZephyRS Media Core Event traits
 //! An event trait is what allows any struct to be able to pass
 //! through the event system
 

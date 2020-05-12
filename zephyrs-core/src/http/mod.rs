@@ -1,5 +1,5 @@
 //!
-//! # RS Media Core HTTP modules
+//! # ZephyRS Media Core HTTP modules
 
 /// HTTP Client
 pub mod client;

@@ -1,5 +1,5 @@
 //!
-//! # RS Media Core Macros
+//! # ZephyRS Media Core Macros
 
 /// Internal errors module
 pub mod errors;
