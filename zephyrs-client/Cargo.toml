@@ -1,8 +1,11 @@
 [package]
 name = "zephyrs-client"
+description = "An electron based media client for the ZephyRS media system"
 version = "0.1.0"
 authors = ["Nic Patterson <nic@reynn.dev>"]
 edition = "2018"
+license-file = "LICENSE"
+repository = "https://github.com/reynn/rs-media"
 
 [dependencies]
 zephyrs-core = { path = "../zephyrs-core" }

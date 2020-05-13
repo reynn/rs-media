@@ -4,6 +4,8 @@
 use super::errors::*;
 use super::traits::Event;
 
+use std::fmt::Display;
+
 /// A very basic event that contains little data
 #[derive(Debug, Copy, Clone)]
 pub struct BasicEvent<'a> {
@@ -20,6 +22,12 @@ impl<'a> BasicEvent<'a> {
             name,
             id: "573a043c-fc71-41c7-a710-d8aa5966b67b",
         })
+    }
+}
+
+impl<'a> Display for BasicEvent<'a> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "BasicEvent<{}>", self.get_event_id())
     }
 }
 

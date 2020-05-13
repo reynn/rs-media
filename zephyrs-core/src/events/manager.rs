@@ -5,8 +5,8 @@
 use std::fmt::{Debug, Display};
 use std::sync::mpsc::{channel, Receiver, Sender};
 
-use super::errors::*;
-use super::traits::{Event, EventHandler};
+use crate::events::errors::*;
+use crate::events::traits::{Event, EventHandler};
 
 #[allow(dead_code)]
 
@@ -41,11 +41,20 @@ impl EventManager {
         Ok(s)
     }
 
+    // TODO: See what a better way to format this is associated types?
     /// Send a new event to its relevant handlers
-    pub async fn send_event(&self, event: Box<dyn Event>) -> Result<()> {
+    pub async fn send_event<T: Event + 'static + std::fmt::Debug + std::fmt::Display>(
+        &self,
+        event: T,
+    ) -> Result<()> {
+        println!("{}", &event);
+        let b: Box<dyn Event> = Box::new(event);
         self.sending_channel
-            .send(event)
+            .send(b)
             .map_err(|e| ErrorKind::ChannelSendError(e.to_string()).into())
+        // self.sending_channel
+        //     .send(event)
+        //     .map_err(|e| ErrorKind::ChannelSendError(e.to_string()).into())
     }
 
     /// gets an event out of the recieving channel
@@ -64,8 +73,8 @@ impl EventManager {
     }
 
     /// Register an event handler
-    pub fn register_handler(&mut self, handler: Box<dyn EventHandler>) -> Result<()> {
-        self.handlers.push(handler);
+    pub fn register_handler(&mut self, _handler: Box<dyn EventHandler>) -> Result<()> {
+        // self.handlers.push(handler);
         Ok(())
     }
 }
@@ -75,11 +84,11 @@ mod test {
     use super::*;
     use test_case::test_case;
 
-    #[test_case("a"; "Test the resulting debug output")]
-    fn test_event_manager_debug(_: &str) -> Result<()> {
+    #[test_case("a"; "Test the resulting dsply output")]
+    fn test_event_manager_dsply(_: &str) -> Result<()> {
         let event_man = EventManager::new()?;
-        let event_man_debg = event_man.to_string();
-        assert_eq!(event_man_debg, "Event manager is ready to handle events");
+        let event_man_dsply = event_man.to_string();
+        assert_eq!(event_man_dsply, "Event manager is ready to handle events");
         Ok(())
     }
 }

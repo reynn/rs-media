@@ -1,8 +1,11 @@
 [package]
 name = "zephyrs-server"
+description = "Media server software to stream your home media content to your devices."
 version = "0.1.0"
 authors = ["Nic Patterson <nic@reynn.dev>"]
 edition = "2018"
+license-file = "LICENSE"
+repository = "https://github.com/reynn/rs-media"
 
 [dependencies]
 zephyrs-core = { path = "../zephyrs-core" }
