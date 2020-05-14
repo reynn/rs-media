@@ -1,0 +1,24 @@
+[package]
+name = "zephyrs-core"
+description = "Core modules for the ZephyRS media system"
+version = "0.1.0"
+authors = ["Nic Patterson <nic@reynn.dev>"]
+edition = "2018"
+license-file = "LICENSE"
+repository = "https://github.com/reynn/rs-media"
+
+[badges]
+codecov = { repository = "reynn/rs-media" }
+maintenance = { status = "actively-developed" }
+
+[dependencies]
+error-chain = { version = "~0.12" }
+warp = { version = "~0.2" }
+futures = { version = "~0.3" }
+reqwest = { version = "~0.10", features = ["json"] }
+tokio = { version = "~0.2", features = ["full"] }
+log = { version = "~0.4" }
+
+[dev-dependencies]
+test-case = "~1.0"
+futures-await-test = "~0.3"

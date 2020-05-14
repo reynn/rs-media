@@ -1,0 +1,14 @@
+[package]
+name = "zephyrs-manager"
+description = "Media management software, setup downloads, fix and modify metadata, and much more"
+version = "0.1.0"
+authors = ["Nic Patterson <nic@reynn.dev>"]
+edition = "2018"
+license-file = "LICENSE"
+repository = "https://github.com/reynn/rs-media"
+
+[dependencies]
+error-chain = { version = "0.12" }
+clap = {version = "3.0.0-beta.1"}
+tokio = { version = "0.2", features = ["full"] }
+zephyrs-core = { path = "../zephyrs-core" }

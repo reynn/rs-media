@@ -1,0 +1,100 @@
+on:
+  push:
+    paths:
+      - '**/*.rs'
+
+name: Rust CI
+
+jobs:
+  build:
+    name: Build binaries for ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Cache cargo registry
+        uses: actions/cache@v1
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.toml') }}
+      - name: Cache cargo index
+        uses: actions/cache@v1
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.toml') }}
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --all-features
+      - name: Move binaries to a directory (unix)
+        if: ${{ runner.os != 'Windows' }}
+        run: |
+          mkdir ./bins
+          mv ./target/release/zephyrs-server ./bins/
+          mv ./target/release/zephyrs-client ./bins/
+          mv ./target/release/zephyrs-manager ./bins/
+      - name: Move binaries to a directory (windows)
+        if: ${{ runner.os == 'Windows' }}
+        run: |
+          mkdir ./bins
+          mv ./target/release/zephyrs-server.exe ./bins/
+          mv ./target/release/zephyrs-client.exe ./bins/
+          mv ./target/release/zephyrs-manager.exe ./bins/
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          # Artifact name
+          name: ${{ matrix.os }}-binaries
+          # A file, directory or wildcard pattern that describes what to upload
+          path: ./bins/*
+  test:
+    name: Test on rust nightly on ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          components: rustfmt, clippy
+      - name: Cache cargo registry
+        uses: actions/cache@v1
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('./**/Cargo.toml') }}
+      - name: Cache cargo index
+        uses: actions/cache@v1
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-index-${{ hashFiles('./**/Cargo.toml') }}
+      - uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: grcov
+      - uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --all -- --deny warnings
+      - run: |
+          export CARGO_INCREMENTAL=0
+          export RUSTFLAGS="-Zprofile -Ccodegen-units=1 -Copt-level=0 -Clink-dead-code -Coverflow-checks=off -Zpanic_abort_tests -Cpanic=abort"
+          export RUSTDOCFLAGS="-Cpanic=abort"
+          echo "Executing tests on the nightly toolchain"
+          cargo +nightly test -- --nocapture
+          echo "Running grcov tool"
+          grcov ./target/debug \
+            -t coveralls \
+            -s . \
+            --llvm \
+            --branch \
+            --ignore-not-existing \
+            -o ./coverage.json \
+            --parallel \
+            --log stdout \
+            --service-job-id $GITHUB_SHA \
+            --service-name github-actions
+      - uses: codecov/codecov-action@v1

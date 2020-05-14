@@ -1,4 +1,4 @@
-name: "Pull Request Labeler"
+name: "PR Label Manager"
 on: [pull_request]
 
 jobs:
