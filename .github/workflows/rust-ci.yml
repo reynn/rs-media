@@ -32,14 +32,14 @@ jobs:
           command: build
           args: --release --all-features
       - name: Move binaries to a directory (unix)
-        if: ${{ matrix.os != 'windows' }}
+        if: ${{ runner.os != 'Windows' }}
         run: |
           mkdir ./bins
           mv ./target/release/zephyrs-server ./bins/
           mv ./target/release/zephyrs-client ./bins/
           mv ./target/release/zephyrs-manager ./bins/
       - name: Move binaries to a directory (windows)
-        if: ${{ matrix.os == 'windows' }}
+        if: ${{ runner.os == 'Windows' }}
         run: |
           mkdir ./bins
           mv ./target/release/zephyrs-server.exe ./bins/
