@@ -10,5 +10,5 @@ repository = "https://github.com/reynn/rs-media"
 [dependencies]
 error-chain = { version = "0.12" }
 clap = {version = "3.0.0-beta.1"}
-tokio = { version = "0.2", features = ["full"] }
+tokio = { version = "0.3", features = ["full"] }
 zephyrs-core = { path = "../zephyrs-core" }
