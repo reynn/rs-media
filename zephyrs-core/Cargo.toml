@@ -20,5 +20,5 @@ tokio = { version = "~0.2", features = ["full"] }
 log = { version = "~0.4" }
 
 [dev-dependencies]
-test-case = "~1.0"
+test-case = "~1.1"
 futures-await-test = "~0.3"
